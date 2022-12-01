@@ -44,6 +44,11 @@ namespace BlogWithDb.Controllers
             var edited = await _postSvc.Update(post.Id, post);
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _postSvc.Delete(id);
+            return RedirectToAction("Index");
+        }
 
     }
 }
