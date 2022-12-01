@@ -20,6 +20,11 @@ namespace BlogWithDb.Controllers
             var result = await _postSvc.Get();
             return View(result);
         }
+        public async Task<IActionResult> Index(int id)
+        {
+            var data = await _postSvc.Get(id);
+            return View(data);
+        }
         public IActionResult Post()
         {
             return View();
