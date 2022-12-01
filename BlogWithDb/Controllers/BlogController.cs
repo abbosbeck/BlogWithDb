@@ -1,6 +1,8 @@
 ﻿using BlogWithDb.Models;
 using BlogWithDb.Services;
 using DataAccess;
+using DataAccess.Entities;
+using DataAccess.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWithDb.Controllers
@@ -30,6 +32,17 @@ namespace BlogWithDb.Controllers
             await _postSvc.Create(post);
 
             return View(post);
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var post = await _postSvc.Get(id);
+            return View(post);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(PostsModel post)
+        {
+            var edited = await _postSvc.Update(post.Id, post);
+            return RedirectToAction("Index");
         }
 
     }
