@@ -12,17 +12,13 @@
 </div>
 
 <table class="table table-bordered table-responsive table-hover">  
-    <tr>  
-        <th>Time </th>  
-        <th></th>  
-     
+    <tr>    
+        <th></th> 
     </tr>  
     @foreach (var d in Model)  
     {  
         <tr>  
-            <td>@d.Text</td>  
-            <td>@d.Title</td>  
-            <td>@d.BlogId</td>   
+            <td>@d.Title</td>     
         </tr>  
     }  
 </table>  

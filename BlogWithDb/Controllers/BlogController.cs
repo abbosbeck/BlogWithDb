@@ -18,5 +18,19 @@ namespace BlogWithDb.Controllers
             var result = await _postSvc.Get();
             return View(result);
         }
+        public IActionResult Post()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Post(PostsModel post)
+        {
+            if (!ModelState.IsValid)
+                return View();
+            await _postSvc.Create(post);
+
+            return View(post);
+        }
+
     }
 }
