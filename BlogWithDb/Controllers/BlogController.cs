@@ -14,16 +14,17 @@ namespace BlogWithDb.Controllers
         {
             _postSvc = postSvc;
         }
-       // [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var result = await _postSvc.Get();
             return View(result);
         }
-        public async Task<IActionResult> Index(int id)
+
+        public async Task<IActionResult> Read(int id)
         {
             var data = await _postSvc.Get(id);
-            return View(data);
+            return View("Read", data);
         }
         public IActionResult Post()
         {
