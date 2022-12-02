@@ -17,8 +17,9 @@
     </tr>  
     @foreach (var d in Model)  
     {  
-        <tr>  
-            <td><a href="blog/read/@d.Id">@d.Title</a></td>     
+        <tr>
+            @*@d.Title = HttpUtility.HtmlDecode(url);*@
+            <td><a href="blog/read/@d.Id">@Html.Raw(@d.Title)</a></td>     
         </tr>  
     }  
 </table>  

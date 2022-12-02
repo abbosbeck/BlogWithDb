@@ -55,6 +55,22 @@ namespace BlogWithDb.Controllers
             await _postSvc.Delete(id);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult UploadImage(List<IFormFile> files)
+        {
+            var filepath = "";
+            foreach(IFormFile photo in Request.Form.Files)
+            {
+                string serverMapPath = Path.Combine("Image", photo.FileName);
+                using (var stream = new FileStream(serverMapPath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                filepath = "https://localhost://251" + "Image/" + photo.FileName;
+            }
+            return Json(new {url = filepath});
+        }
+
 
     }
 }
