@@ -18,7 +18,6 @@ namespace BlogWithDb.Services
             {
                 Id = model.Id,
                 Title = model.Title,
-                BlogId = model.BlogId,
                 Text = model.Text
             };
             var createPost = await _addressRepository.Create(Post);
@@ -26,7 +25,6 @@ namespace BlogWithDb.Services
             {
                 Id = model.Id,
                 Title = createPost.Title,
-                BlogId = createPost.BlogId,
                 Text = createPost.Text
             };
             return result;
@@ -47,8 +45,7 @@ namespace BlogWithDb.Services
                 {
                     Id=post.Id,
                    Title = post.Title,
-                   Text = post.Text,
-                   BlogId = post.BlogId
+                   Text = post.Text
                 };
                 result.Add(model);
             }
@@ -62,8 +59,7 @@ namespace BlogWithDb.Services
             {
                 Id = model.Id,
                 Title=model.Title,
-                Text = model.Text,
-                BlogId = model.BlogId
+                Text = model.Text
             };
             return result;
         }
@@ -74,16 +70,13 @@ namespace BlogWithDb.Services
             {
                 Id = model.Id,
                 Title = model.Title,
-                Text=model.Text,
-                BlogId=model.BlogId
-            };
+                Text=model.Text            };
             var updatePost = await _addressRepository.Update(id, post);
             var result = new PostsModel
             {
                 Id=model.Id,
                 Text = updatePost.Text,
-                Title = updatePost.Title,
-                BlogId = updatePost.BlogId
+                Title = updatePost.Title
             };
             return result;
         }
