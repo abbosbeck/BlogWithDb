@@ -1,9 +1,7 @@
 ﻿namespace BlogWithDb.Models
 {
-    public class RegisterModel
+    public class RegisterModel : LoginModel
     {
-        public string Username { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
     }
 }
