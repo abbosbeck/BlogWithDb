@@ -5,10 +5,13 @@
 @{
     
 }
-<div class="text-center">
-    <h4>@Html.Raw(@Model.Title)</h4>
-    <hr />
-</div>
-<div class="text-center">
-    @Html.Raw(@Model.Text)
+<div class="container">
+
+    <div class="text-center">
+        <h4>@Html.Raw(@Model.Title)</h4>
+        <hr />
+    </div>
+    <div class="text-center">
+        @Html.Raw(@Model.Text)
+    </div>
 </div>
