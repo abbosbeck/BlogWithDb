@@ -3,6 +3,7 @@ using BlogWithDb.Services;
 using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Repositorys;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWithDb.Controllers
@@ -14,6 +15,7 @@ namespace BlogWithDb.Controllers
         {
             _postSvc = postSvc;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {

@@ -7,11 +7,39 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BlogWithDb.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/front/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/front/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/front/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    @*<!-- Customized Bootstrap Stylesheet -->
+    <link href="~/lib/front/css/bootstrap.min.css" rel="stylesheet">
+*@
+    <!-- Template Stylesheet -->
+    <link href="/lib/front/css/style.css" rel="stylesheet">
+
 </head>
 <body>
+
+
+    @*<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+*@
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="text-center container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Abbosjon's Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -33,20 +61,43 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="">
+        <main role="main" class="">
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - Abduqayumov.uz
         </div>
     </footer>
+        @*<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>*@
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="lib/front/wow/wow.min.js"></script>*@
+    <script src="lib/front/easing/easing.min.js"></script>
+    <script src="lib/front/waypoints/waypoints.min.js"></script>
+    <script src="lib/front/typed/typed.min.js"></script>
+    <script src="lib/front/counterup/counterup.min.js"></script>
+    <script src="lib/front/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/front/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/front/lightbox/js/lightbox.min.js"></script>
+
+
+    <script src="lib/front/main.js"></script>
+
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
