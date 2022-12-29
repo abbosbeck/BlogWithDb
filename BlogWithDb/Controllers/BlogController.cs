@@ -22,7 +22,7 @@ namespace BlogWithDb.Controllers
             var result = await _postSvc.Get();
             return View(result);
         }
-
+        [Authorize]
         public async Task<IActionResult> Read(int id)
         {
             var data = await _postSvc.Get(id);
