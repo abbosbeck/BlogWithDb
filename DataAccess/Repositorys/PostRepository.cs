@@ -32,7 +32,7 @@ namespace DataAccess.Repositorys
 
         public async Task<IEnumerable<Posts>> Get()
         {
-            return await _dbContext.Posts.ToListAsync();
+            return await _dbContext.Posts.OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<Posts> Get(int id)
