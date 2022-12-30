@@ -89,7 +89,7 @@ builder.Services.AddAuthentication(options =>
 
 
 
-builder.Services.AddScoped<IGenericCRUDService<PostsModel>, PostsCRUDService>();
+builder.Services.AddScoped<IGenericCRUDService<PostResponseModel, PostRegisterModel>, PostsCRUDService>();
 builder.Services.AddScoped<IGenericRepository<Posts>, PostRepository>();
 
 var app = builder.Build();
@@ -110,6 +110,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Blog}/{action=Index}/{id?}");
 
 app.Run();

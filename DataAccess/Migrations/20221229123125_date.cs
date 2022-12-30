@@ -5,13 +5,17 @@
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class deletedPosts3 : Migration
+    public partial class DatePost : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "BlogId",
+                table: "Posts");
+
             migrationBuilder.AddColumn<string>(
-                name: "ImageUrl",
+                name: "DatePost",
                 table: "Posts",
                 type: "nvarchar(max)",
                 nullable: false,
@@ -22,8 +26,15 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImageUrl",
+                name: "DatePost",
                 table: "Posts");
+
+            migrationBuilder.AddColumn<int>(
+                name: "BlogId",
+                table: "Posts",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
     }
 }
