@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlogWithDb.Models.PostsModel>
+﻿@model IEnumerable<BlogWithDb.Models.PostResponseModel>
 
 <div class="container">
         <div class="text-center">
@@ -6,20 +6,30 @@
             <hr />
         </div>  
 
-        <div>
+       
 
-        </div>
-
-        <table class="table table-bordered table-responsive table-hover">  
-            <tr>    
-                <th></th> 
-            </tr>  
+    <div class="row">
+        <div class="col">
             @foreach (var d in Model)  
             {  
-                <tr>
-                    @*@d.Title = HttpUtility.HtmlDecode(url);*@
-                    <td><a href="blog/read/@d.Id">@Html.Raw(@d.Title)</a></td>     
-                </tr>  
+
+                <div id="for-hover">
+                    <code style="font-size: 15px;" class="text-muted">
+                        @Html.Raw(@d.Date)
+                    </code>
+                    <a class="link-dark text-decoration-none" style="font-size: 19px;" href="blog/read/@d.Id">@Html.Raw(@d.Title)</a>
+                    <hr style="width:80%; margin-top: -5px;" />
+                </div>
             }  
-        </table>  
+        </div>
+        <div class="col sticky-top" id="newsletter-all">
+            <div class="sticky">
+                <h6 id="newsletter">NEWSLETTER</h6>
+                <div id="newsletter-text">
+                    Subscribe to my telegram channel <br /><a class="text-decoration-none" href="https://t.me/Abduqayumov">@@Abduqayumov</a> where I share short <br />thoughts about technical and non-technical.
+                </div>
+            </div>
+        </div>
+    </div>
+        
 </div>

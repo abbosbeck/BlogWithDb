@@ -1,5 +1,5 @@
 ﻿@using System.Web.Mvc
-@model BlogWithDb.Models.PostsModel
+@model BlogWithDb.Models.PostResponseModel
 
 
 @{
@@ -11,7 +11,18 @@
         <h4>@Html.Raw(@Model.Title)</h4>
         <hr />
     </div>
-    <div class="text-center">
+    <div>
+        <p style="font-size: 12px;">
+            @Html.Raw(@Model.Date)
+        </p>
+    </div>
+    <div style="font-size: 16px;" class="text-center">
         @Html.Raw(@Model.Text)
     </div>
+    <div class="col sticky-top" id="newsletter-all-intext">
+            <h6 id="newsletter">NEWSLETTER</h6>
+            <div id="newsletter-text">
+                Subscribe to my telegram channel <br /><a class="text-decoration-none" href="https://t.me/Abduqayumov">@@Abduqayumov</a> where I share short <br />thoughts about technical and non-technical.
+            </div>
+        </div>
 </div>

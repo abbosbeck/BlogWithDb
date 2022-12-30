@@ -10,8 +10,8 @@ namespace BlogWithDb.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly IGenericCRUDService<PostsModel> _postSvc;
-        public BlogController(IGenericCRUDService<PostsModel> postSvc)
+        private readonly IGenericCRUDService<PostResponseModel, PostRegisterModel> _postSvc;
+        public BlogController(IGenericCRUDService<PostResponseModel, PostRegisterModel> postSvc)
         {
             _postSvc = postSvc;
         }
@@ -22,7 +22,6 @@ namespace BlogWithDb.Controllers
             var result = await _postSvc.Get();
             return View(result);
         }
-        [Authorize]
         public async Task<IActionResult> Read(int id)
         {
             var data = await _postSvc.Get(id);
@@ -33,9 +32,9 @@ namespace BlogWithDb.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Post(PostsModel post)
+        public async Task<IActionResult> Post(PostRegisterModel post)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
                 return View();
             await _postSvc.Create(post);
 
@@ -47,9 +46,9 @@ namespace BlogWithDb.Controllers
             return View(post);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(PostsModel post)
+        public async Task<IActionResult> Edit(int id, PostResponseModel post)
         {
-            var edited = await _postSvc.Update(post.Id, post);
+            await _postSvc.Update(id, post);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Delete(int id)
