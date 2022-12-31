@@ -34,11 +34,11 @@ namespace BlogWithDb.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PostRegisterModel post)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return View();
             await _postSvc.Create(post);
 
-            return View(post);
+            return View();
         }
         public async Task<IActionResult> Edit(int id)
         {
