@@ -5,19 +5,26 @@
 @{
     
 }
-<div class="container">
 
-    <div class="text-center">
-        <h4>@Html.Raw(@Model.Title)</h4>
-        <hr />
-    </div>
-    <div>
-        <p style="font-size: 12px;">
-            @Html.Raw(@Model.Date)
-        </p>
-    </div>
-    <div style="font-size: 16px;" class="text-center">
-        @Html.Raw(@Model.Text)
+<script src="~/js/jquery/jquery.min.js"></script>
+
+<div class="container">
+    <div id="divMainBody" style="padding-left: 300px; padding-right: 300px">
+        <div class="text-center">
+            <h4>@Html.Raw(@Model.Title)</h4>
+            <hr />
+        </div>
+        <div>
+            <p style="font-size: 12px;">
+                @Html.Raw(@Model.Date)
+            </p>
+        </div>
+        <div style="font-size: 16px;" class="text-center">
+            @Html.Raw(@Model.Text)
+        </div>
+        <div>
+            <button class="btn btn-outline-info me-2" id="btnGenerate"><i class="fab bi bi-file-pdf">PDF</i></button>
+        </div>
     </div>
     <div class="col sticky-top" id="newsletter-all-intext">
             <h6 id="newsletter">NEWSLETTER</h6>
@@ -26,3 +33,12 @@
             </div>
         </div>
 </div>
+
+<script type="text/javascript">
+$("#btnGenerate").click(function() {
+    var html = $("#divMainBody").html();
+    html = html.replace(/</g, "start").replace(/>/g, "end");
+
+    window.open("../../PDFGenerator/Generator?html="+html, "_blank");
+});
+</script>
