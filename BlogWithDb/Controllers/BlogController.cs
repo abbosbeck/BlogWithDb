@@ -5,6 +5,7 @@ using DataAccess.Entities;
 using DataAccess.Repositorys;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SelectPdf;
 
 namespace BlogWithDb.Controllers
 {
@@ -71,7 +72,24 @@ namespace BlogWithDb.Controllers
             }
             return Json(new {url = filepath});
         }
+        public IActionResult Generator(string html)
+        {
+            // instantiate a html to pdf converter object
+            HtmlToPdf converter = new HtmlToPdf();
 
+            html = html.Replace("start", "<").Replace("end", ">");
+
+            // create a new pdf document converting an url
+            PdfDocument doc = converter.ConvertHtmlString(html);
+
+            // save pdf document
+            //doc.Save($@"{AppDomain.CurrentDomain.BaseDirectory}\url.pdf");
+
+            byte[] pdfFile = doc.Save();
+            doc.Close();
+
+            return File(pdfFile, "application/pdf");
+        }
 
     }
 }

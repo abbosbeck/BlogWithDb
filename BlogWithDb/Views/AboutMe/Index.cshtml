@@ -1,26 +1,17 @@
-﻿@using System.Web.Mvc
-@model BlogWithDb.Models.PostResponseModel
-
-
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-    
+    ViewData["Title"] = "About me";
 }
-
-<script src="~/js/jquery/jquery.min.js"></script>
-
 <div class="container">
     <div id="divMainBody" style="padding-left: 300px; padding-right: 300px">
         <div class="text-center">
-            <h4>@Html.Raw(@Model.Title)</h4>
+            <h4>Hi! I'm Abbos Abduqayumov and here's my story...</h4>
             <hr />
         </div>
-        <div>
-            <p style="font-size: 12px;">
-                @Html.Raw(@Model.Date)
-            </p>
-        </div>
         <div style="font-size: 16px;" class="text-center">
-            @Html.Raw(@Model.Text)
+            Story
         </div>
         <div>
             <p style="text-align: right;">
@@ -35,12 +26,4 @@
             </div>
         </div>
 </div>
-
-<script type="text/javascript">
-$("#btnGenerate").click(function() {
-    var html = $("#divMainBody").html();
-    html = html.replace(/</g, "start").replace(/>/g, "end");
-
-    window.open("../../PDFGenerator/Generator?html="+html, "_blank");
-});
-</script>
+Hi! I'm Abbos Abduqayumov and here's my story...
