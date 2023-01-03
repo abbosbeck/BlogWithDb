@@ -48,13 +48,7 @@ namespace BlogWithDb.Controllers
 
 
 
-
-                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
-                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, loginModel.Username));
-                identity.AddClaim(new Claim(ClaimTypes.Name, loginModel.Username));
-                var principal = new ClaimsPrincipal(identity);
-                
-                await HttpContext.SignInAsync(
+                /*await HttpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     principal,
                     new AuthenticationProperties
@@ -63,12 +57,12 @@ namespace BlogWithDb.Controllers
                         AllowRefresh = true,
                         ExpiresUtc = DateTime.UtcNow.AddDays(1)
                     });
-
-                return Ok(new
+*/
+                /*return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
-                });
+                });*/
             }
             
             return Unauthorized();

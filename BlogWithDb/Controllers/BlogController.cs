@@ -18,6 +18,7 @@ namespace BlogWithDb.Controllers
         }
 
         [HttpGet]
+        
         public async Task<IActionResult> Index()
         {
             var result = await _postSvc.Get();
