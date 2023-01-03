@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "About me";
 }
+<script src="~/js/jquery/jquery.min.js"></script>
 <div class="container">
     <div id="divMainBody" style="padding-left: 300px; padding-right: 300px">
         <div class="text-center">
@@ -26,4 +27,12 @@
             </div>
         </div>
 </div>
-Hi! I'm Abbos Abduqayumov and here's my story...
+<script src="~/js/PDFGenerator.js"></script>
+<@*script>
+    $("#btnGenerate").click(function() {
+    var html = $("#divMainBody").html();
+    html = html.replace(/</g, "start").replace(/>/g, "end");
+
+    window.open("../../PDFGenerator/Generator?html="+html, "_blank");
+});
+</script>*@
