@@ -13,5 +13,6 @@ namespace DataAccess.Entities
         public string Text { get; set; }
  
         public string Date { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
