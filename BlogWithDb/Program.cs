@@ -92,6 +92,9 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IGenericCRUDService<PostResponseModel, PostRegisterModel>, PostsCRUDService>();
 builder.Services.AddScoped<IGenericRepository<Posts>, PostRepository>();
 
+builder.Services.AddScoped<ICommentCRUDService<CommentResponseModel, CommentRegisterModel>, CommentCRUDService>();
+builder.Services.AddScoped<IGenericRepository<Comment>, CommentRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
