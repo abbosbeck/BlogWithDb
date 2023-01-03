@@ -1,6 +1,5 @@
 ﻿@using System.Web.Mvc
-@model BlogWithDb.Models.PostResponseModel
-
+@model BlogWithDb.Models.ReadViewModel 
 
 @{
     
@@ -11,16 +10,16 @@
 <div class="container">
     <div id="divMainBody" style="padding-left: 25%; padding-right: 25%">
         <div class="text-center">
-            <h4>@Html.Raw(@Model.Title)</h4>
+            <h4>@Html.Raw(@Model.Posts.Title)</h4>
             <hr />
         </div>
         <div>
             <p style="font-size: 12px;">
-                @Html.Raw(@Model.Date)
+                @Html.Raw(@Model.Posts.Date)
             </p>
         </div>
         <div style="font-size: 16px;" class="text-center">
-            @Html.Raw(@Model.Text)
+            @Html.Raw(@Model.Posts.Text)
         </div>
         <div>
             <p style="text-align: right;">
@@ -28,12 +27,42 @@
             </p>
         </div>
     </div>
-    <div class="col sticky-top" id="newsletter-all-intext">
+    <div class="col" id="newsletter-all-intext">
             <h6 id="newsletter">NEWSLETTER</h6>
             <div id="newsletter-text">
                 Subscribe to my telegram channel <br /><a class="text-decoration-none" href="https://t.me/Abduqayumov">@@Abduqayumov</a> where I share short <br />thoughts about technical and non-technical.
             </div>
+     </div>
+     <div style="padding-left: 25%; padding-right: 25%">
+        @foreach (var d in @Model.Comments)  
+            {  
+                @Html.Raw(d.Name) <br />
+                @Html.Raw(d.Text)    <br /><br /><br />
+            }
+        <form asp-action="Read" asp-controller="Blog">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+            @Html.LabelFor(model => model.CommentRegister.PostId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Posts.Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommentRegister.PostId, "", new { @class = "text-danger" })
+            </div>
         </div>
+            <div class="form-group">
+                    <label asp-for="@Model.CommentRegister.Name" class="control-label"></label>
+                    <input asp-for="@Model.CommentRegister.Name" class="control-label col-md-2"/>
+            </div>
+            <div class="form-group">
+                    <label asp-for="@Model.CommentRegister.Text" class="control-label"></label>
+                    <input asp-for="@Model.CommentRegister.Text" class="control-label col-md-2"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+     </div>
+
+
 </div>
 
 <script src="~/js/PDFGenerator.js"></script>

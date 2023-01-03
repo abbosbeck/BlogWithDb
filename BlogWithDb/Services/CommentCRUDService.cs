@@ -4,12 +4,12 @@ using DataAccess.Repositorys;
 
 namespace BlogWithDb.Services
 {
-    public class CommentCRUDService : IGenericCRUDService<CommentResponseModel, CommentRegisterModel>
+    public class CommentCRUDService : ICommentCRUDService<CommentResponseModel, CommentRegisterModel>
     {
-        private readonly IGenericRepository<Comment> _addressRepository;
+        private readonly IGenericRepository<Comment> _commentRepository;
         public CommentCRUDService(IGenericRepository<Comment> addressRepositroy)
         {
-            _addressRepository = addressRepositroy;
+            _commentRepository = addressRepositroy;
         }
 
         public async Task<CommentResponseModel> Create(CommentRegisterModel model)
@@ -20,7 +20,7 @@ namespace BlogWithDb.Services
                 Text = model.Text,
                 PostId = model.PostId,
             };
-            var createComment = await _addressRepository.Create(comment);
+            var createComment = await _commentRepository.Create(comment);
             var result = new CommentResponseModel()
             {
                 Id = createComment.Id,
@@ -33,13 +33,13 @@ namespace BlogWithDb.Services
 
         public async Task<bool> Delete(int id)
         {
-            return await _addressRepository.Delete(id);
+            return await _commentRepository.Delete(id);
         }
 
         public async Task<IEnumerable<CommentResponseModel>> Get()
         {
             var result = new List<CommentResponseModel>();
-            var comments = await _addressRepository.Get();
+            var comments = await _commentRepository.Get();
             foreach (var comment in comments)
             {
                 var model = new CommentResponseModel
@@ -54,16 +54,24 @@ namespace BlogWithDb.Services
             return result;
         }
 
-        public async Task<CommentResponseModel> Get(int id)
+        public async Task<IEnumerable<CommentResponseModel>> Get(int id)
         {
-            var model = await _addressRepository.Get(id);
-            var result = new CommentResponseModel
+            var result = new List<CommentResponseModel>();
+            var comments = await _commentRepository.Get();
+            foreach (var comment in comments)
             {
-                Id = model.Id,
-                Name = model.Name,
-                PostId = model.PostId,
-                Text = model.Text
-            };
+                if(comment.PostId == id)
+                {
+                    var model = new CommentResponseModel
+                    {
+                        Id = comment.Id,
+                        Name = comment.Name,
+                        Text = comment.Text,
+                        PostId = comment.PostId
+                    };
+                    result.Add(model);
+                }
+            }
             return result;
         }
 
@@ -76,7 +84,7 @@ namespace BlogWithDb.Services
                 Name = model.Name,
                 Text = model.Text
             };
-            var updateComment = await _addressRepository.Update(id, comment);
+            var updateComment = await _commentRepository.Update(id, comment);
             var result = new CommentResponseModel
             {
                 Id = updateComment.Id,

@@ -12,9 +12,11 @@ namespace BlogWithDb.Controllers
     public class BlogController : Controller
     {
         private readonly IGenericCRUDService<PostResponseModel, PostRegisterModel> _postSvc;
-        public BlogController(IGenericCRUDService<PostResponseModel, PostRegisterModel> postSvc)
+        private readonly ICommentCRUDService<CommentResponseModel, CommentRegisterModel> _commentSvc;
+        public BlogController(IGenericCRUDService<PostResponseModel, PostRegisterModel> postSvc, ICommentCRUDService<CommentResponseModel, CommentRegisterModel> commentSvc)
         {
             _postSvc = postSvc;
+            _commentSvc = commentSvc;
         }
 
         [HttpGet]
@@ -26,8 +28,21 @@ namespace BlogWithDb.Controllers
         }
         public async Task<IActionResult> Read(int id)
         {
-            var data = await _postSvc.Get(id);
+            var post = await _postSvc.Get(id);
+            var comments = await _commentSvc.Get(id);
+            var data = new ReadViewModel()
+            {
+                Comments = comments.ToList(),
+                Posts = post
+            };
             return View("Read", data);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Read(ReadViewModel model)
+        {
+            model.CommentRegister.PostId = model.Posts.Id;
+            await _commentSvc.Create(model.CommentRegister);
+            return RedirectToAction();
         }
         public IActionResult Post()
         {
