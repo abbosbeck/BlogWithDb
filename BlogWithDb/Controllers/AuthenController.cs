@@ -58,13 +58,13 @@ namespace BlogWithDb.Controllers
                         ExpiresUtc = DateTime.UtcNow.AddDays(1)
                     });
 */
-                /*return Ok(new
+                return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
-                });*/
+                });
             }
-            
+
             return Unauthorized();
             //return View();
         }
