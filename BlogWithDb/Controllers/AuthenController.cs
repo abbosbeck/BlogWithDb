@@ -15,12 +15,12 @@ namespace BlogWithDb.Controllers
 {
     public class AuthenController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IConfiguration _configuration;
-        public AuthenController(UserManager<AppUser> userManager, IConfiguration configuration)
+       // private readonly UserManager<AppUser> _userManager;
+        //private readonly IConfiguration _configuration;
+        public AuthenController()
         {
-            _userManager = userManager;
-            _configuration = configuration;
+            //_userManager = userManager;
+           // _configuration = configuration;
         }
         public IActionResult Login()
         {
@@ -29,46 +29,32 @@ namespace BlogWithDb.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var foundUser = await _userManager.FindByNameAsync(loginModel.Username);
-            if (foundUser != null && await _userManager.CheckPasswordAsync(foundUser, loginModel.Password))
+            if (loginModel.Username == "Admin" && loginModel.Password == "123")
             {
-                var roles = await _userManager.GetRolesAsync(foundUser);
-                List<Claim> claims = new List<Claim>();
-                Claim claim1 = new Claim(ClaimTypes.Name, foundUser.UserName);
-                Claim claim2 = new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
-                claims.Add(claim1);
-                claims.Add(claim2);
-                foreach (var role in roles)
+                List<Claim> claims = new List<Claim>()
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, role));
-                }
-                var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-                var token = new JwtSecurityToken(_configuration["JWT:ValidIssuer"], _configuration["JWT:ValidAudience"], claims, expires: DateTime.Now.AddHours(1),
-                    signingCredentials: new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256));
+                    new Claim(ClaimTypes.NameIdentifier, loginModel.Username),
+                    new Claim("Other properties", "Exampe: roles"),
+                };
 
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
+                    CookieAuthenticationDefaults.AuthenticationScheme);
 
-
-                /*await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    principal,
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = true,
-                        AllowRefresh = true,
-                        ExpiresUtc = DateTime.UtcNow.AddDays(1)
-                    });
-*/
-                return Ok(new
+                AuthenticationProperties properties = new AuthenticationProperties()
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                    AllowRefresh = true,
+                    IsPersistent = false,
+
+                };
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), properties);
+                return RedirectToAction("Index", "Home");
             }
-
-            return Unauthorized();
+                return Unauthorized();
             //return View();
         }
-        public IActionResult Register()
+        /*public IActionResult Register()
         {
             return View();
         }
@@ -96,6 +82,6 @@ namespace BlogWithDb.Controllers
             }
             return RedirectToAction("login");
 
-        }
+        }*/
     }
 }
