@@ -1,11 +1,9 @@
 ﻿@using System.Web.Mvc
-@model BlogWithDb.Models.ReadViewModel 
-
-@{
-    
-}
+@model BlogWithDb.Models.ReadViewModel
 
 <script src="~/js/jquery/jquery.min.js"></script>
+
+
 
 <div class="container">
     <div id="divMainBody" style="padding-left: 25%; padding-right: 25%">
@@ -28,51 +26,50 @@
         </div>
     </div>
     <div class="col" id="newsletter-all-intext">
-            <h6 id="newsletter">NEWSLETTER</h6>
-            <div id="newsletter-text">
-                Subscribe to my telegram channel <br /><a class="text-decoration-none" href="https://t.me/Abduqayumov">@@Abduqayumov</a> where I share short <br />thoughts about technical and non-technical.
-            </div>
-     </div>
-     <div style="padding-left: 25%; padding-right: 25%">
-        @foreach (var d in @Model.Comments)  
-            {  
-                @Html.Raw(d.Name) <br />
-                @Html.Raw(d.Text)    <br /><br /><br />
+        <h6 id="newsletter">NEWSLETTER</h6>
+        <div id="newsletter-text">
+            Subscribe to my telegram channel <br /><a class="text-decoration-none" href="https://t.me/Abduqayumov">@@Abduqayumov</a> where I share short <br />thoughts about technical and non-technical.
+        </div>
+    </div>
+    <div style="padding-left: 25%; padding-right: 25%">
+        @foreach (var d in @Model.Comments)
+            {
+        @Html.Raw(d.Name)  <br />
+        @Html.Raw(d.Text)  <br /><br /><br />
             }
 
-            <script async src="https://comments.app/js/widget.js?3" data-comments-app-website="bQl6FWYZ" data-limit="5"></script>
         <form asp-action="Read" asp-controller="Blog">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-            @*@Html.LabelFor(model => model.CommentRegister.PostId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @Html.LabelFor(model => model.CommentRegister.PostId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10" style="display: none;">
                     @Html.EditorFor(model => model.Posts.Id)
                 </div>
             </div>
             <div class="form-group">
-                    <label asp-for="@Model.CommentRegister.Name" class="control-label"></label>
-                    <input asp-for="@Model.CommentRegister.Name" class="control-label col-md-2"/>
+                <label asp-for="@Model.CommentRegister.Name" class="control-label"></label>
+                <input asp-for="@Model.CommentRegister.Name" class="control-label col-md-2" />
             </div>
             <div class="form-group">
-                    <label asp-for="@Model.CommentRegister.Text" class="control-label"></label>
-                    <input asp-for="@Model.CommentRegister.Text" class="control-label col-md-2"/>
+                <label asp-for="@Model.CommentRegister.Text" class="control-label"></label>
+                <input asp-for="@Model.CommentRegister.Text" class="control-label col-md-2" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-     </div>
+    </div>
 
 
 </div>
 
 <script src="~/js/PDFGenerator.js"></script>
 @*<script type="text/javascript">
-$("#btnGenerate").click(function() {
-    var html = $("#divMainBody").html();
-    html = html.replace(/</g, "start").replace(/>/g, "end");
+    $("#btnGenerate").click(function() {
+        var html = $("#divMainBody").html();
+        html = html.replace(/</g, "start").replace(/>/g, "end");
 
-    window.open("../../PDFGenerator/Generator?html="+html, "_blank");
-});
-</script>
+        window.open("../../PDFGenerator/Generator?html="+html, "_blank");
+    });
+    </script>
 *@

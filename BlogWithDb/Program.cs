@@ -25,7 +25,7 @@ builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Home/NotAccess";
+        options.LoginPath = "/Home/NoAccess";
         options.ExpireTimeSpan = TimeSpan.FromSeconds(15);
     });
 

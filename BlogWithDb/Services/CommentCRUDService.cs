@@ -94,5 +94,10 @@ namespace BlogWithDb.Services
             };
             return result;
         }
+/*
+        Task<CommentResponseModel> IGenericCRUDService<CommentResponseModel, CommentRegisterModel>.Get(int id)
+        {
+            throw new NotImplementedException();
+        }*/
     }
 }

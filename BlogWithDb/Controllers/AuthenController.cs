@@ -15,15 +15,18 @@ namespace BlogWithDb.Controllers
 {
     public class AuthenController : Controller
     {
-       // private readonly UserManager<AppUser> _userManager;
-        //private readonly IConfiguration _configuration;
         public AuthenController()
         {
-            //_userManager = userManager;
-           // _configuration = configuration;
+
         }
         public IActionResult Login()
         {
+            ClaimsPrincipal claimUser = HttpContext.User;
+
+            if (claimUser.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
+
             return View();
         }
         [HttpPost]
@@ -33,8 +36,7 @@ namespace BlogWithDb.Controllers
             {
                 List<Claim> claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.NameIdentifier, loginModel.Username),
-                    new Claim("Other properties", "Exampe: roles"),
+                    new Claim(ClaimTypes.NameIdentifier, loginModel.Username)
                 };
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
@@ -51,37 +53,15 @@ namespace BlogWithDb.Controllers
                     new ClaimsPrincipal(claimsIdentity), properties);
                 return RedirectToAction("Index", "Home");
             }
-                return Unauthorized();
-            //return View();
-        }
-        /*public IActionResult Register()
-        {
+            ViewData["ValidateMessage"] = "User not found!";
             return View();
         }
-        [Route("Register")]
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel registerModel)
+        public async Task<IActionResult> LogOut()
         {
-            var foundUser = await _userManager.FindByNameAsync(registerModel.Username);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
 
-            if (foundUser != null)
-            {
-                return Ok("User already exist!");
-            }
-            var user = new AppUser
-            {
-                Email = registerModel.Email,
-                UserName = registerModel.Username,
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
-
-            var result = await _userManager.CreateAsync(user, registerModel.Password);
-            if (!result.Succeeded)
-            {
-                return Ok("User creation faild!");
-            }
-            return RedirectToAction("login");
-
-        }*/
     }
+
 }

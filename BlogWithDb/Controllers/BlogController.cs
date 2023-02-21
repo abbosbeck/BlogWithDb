@@ -44,7 +44,6 @@ namespace BlogWithDb.Controllers
             await _commentSvc.Create(model.CommentRegister);
             return RedirectToAction();
         }
-        [Authorize]
         public IActionResult Post()
         {
             return View();
